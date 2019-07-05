@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Matriculas_Formulario extends AppCompatActivity {
@@ -96,11 +97,14 @@ public class Matriculas_Formulario extends AppCompatActivity {
                 }else if(ch_equipo2.isChecked()){
                     equipo = 2;
                 }
+
                 String nombres = txt_nombres_matricula.getText().toString();
-                datos.Matricularme(equipo, datos.Obtener_Seleccion_Juego(), nombres);
-                txt_nombres_matricula.setText("");
-                Toast.makeText(getApplicationContext(), "Jugador agregado.", Toast.LENGTH_SHORT).show();
-                Llenar_Listado();
+                if (!nombres.isEmpty()){
+                    datos.Matricularme(equipo, datos.Obtener_Seleccion_Juego(), nombres);
+                    txt_nombres_matricula.setText("");
+                    Toast.makeText(getApplicationContext(), "Jugador agregado.", Toast.LENGTH_SHORT).show();
+                    Llenar_Listado();
+                }
             }
         });
 
@@ -121,15 +125,12 @@ public class Matriculas_Formulario extends AppCompatActivity {
 
     private void Llenar_Listado(){
         int total = datos.Numero_Jugadores(datos.Obtener_Seleccion_Juego(), 1);
-        String[] equipo1 = new String[10];
-        int pos = 0;
+        ArrayList equipo1 = new ArrayList();
 
         for (int i=0; i<=total; i++){
-            try{
-                equipo1[pos] = datos.Listado(datos.Obtener_Seleccion_Juego(), 1, i);
-                pos+=1;
-            }catch(Exception e){
-                Log.d("NOMBRE JUGADOR", "NINGUNO");
+            String dato = datos.Listado(datos.Obtener_Seleccion_Juego(), 1, i);
+            if (dato != null){
+                equipo1.add(dato);
             }
         }
 
@@ -138,22 +139,18 @@ public class Matriculas_Formulario extends AppCompatActivity {
         listado_equipo1.setAdapter(adapter);
 
 
-
         int total2 = datos.Numero_Jugadores(datos.Obtener_Seleccion_Juego(), 2);
-        String[] equipo2 = new String[10];
-        int pos2 = 0;
+        ArrayList equipo2 = new ArrayList();
 
         for (int i=0; i<=total2; i++){
-            try{
-                equipo2[pos2] = datos.Listado(datos.Obtener_Seleccion_Juego(), 2, i);
-                pos2+=1;
-            }catch(Exception e){
-                Log.d("NOMBRE JUGADOR", "NINGUNO");
+            String dato = datos.Listado(datos.Obtener_Seleccion_Juego(), 2, i);
+            if (dato!=null) {
+                equipo2.add(dato);
             }
         }
 
         ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1, equipo2);
+                  android.R.layout.simple_list_item_1, equipo2);
         listado_equipo2.setAdapter(adapter2);
     }
 }
