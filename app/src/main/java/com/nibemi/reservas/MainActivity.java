@@ -8,7 +8,7 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button btn_reservas, btn_matriculas;
+    Button btn_reservas, btn_matriculas, btn_salir;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent Reservas_Actividad = new Intent(getApplicationContext(), Reservas.class);
                 startActivity(Reservas_Actividad);
+                finish();
             }
         });
 
@@ -32,6 +33,15 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent Matriculas_Actividad = new Intent(getApplicationContext(), Matriculas.class);
                 startActivity(Matriculas_Actividad);
+                finish();
+            }
+        });
+
+        btn_salir = (Button)findViewById(R.id.btn_salir);
+
+        btn_salir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 finish();
             }
         });

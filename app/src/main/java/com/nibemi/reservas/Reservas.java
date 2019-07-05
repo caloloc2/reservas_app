@@ -8,6 +8,7 @@ import android.widget.Button;
 
 public class Reservas extends AppCompatActivity {
 
+    Datos datos = new Datos();
     Button btn_futbol, btn_volley, btn_regresar;
 
     @Override
@@ -19,6 +20,7 @@ public class Reservas extends AppCompatActivity {
         btn_futbol.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                datos.Seleccion_Juego(1);
                 Formulario();
             }
         });
@@ -27,6 +29,7 @@ public class Reservas extends AppCompatActivity {
         btn_volley.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                datos.Seleccion_Juego(2);
                 Formulario();
             }
         });
@@ -35,6 +38,7 @@ public class Reservas extends AppCompatActivity {
         btn_regresar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                datos.Seleccion_Juego(0);
                 Intent Principal = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(Principal);
                 finish();
